@@ -1,103 +1,120 @@
-import React from 'react';
-import { Button, DatePicker, Form, TimePicker, Row, Col } from 'antd';
+import React, { useState } from 'react';
+import {
+  Button,
+  Cascader,
+  DatePicker,
+  Form,
+  Input,
+  InputNumber,
+  Select,
+  TreeSelect,
+  Segmented,
+} from 'antd';
 
 const { RangePicker } = DatePicker;
+const { Option } = Select;  // Pega o Option do Select
 
 const formItemLayout = {
   labelCol: {
-    xs: { span: 20 },
-    sm: { span: 8 },
+    xs: { span: 24 },
+    sm: { span: 20 }, 
   },
   wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 },
+    xs: { span: 40 },
+    sm: { span: 50 },
   },
 };
 
-const config = {
-  rules: [{ type: 'object', required: true, message: 'Please select time!' }],
-};
+const App = () => {
+  const [componentVariant, setComponentVariant] = useState('filled');
+  const [selectedOption, setSelectedOption] = useState(null); // Estado para controlar o Select
 
-const rangeConfig = {
-  rules: [{ type: 'array', required: true, message: 'Please select time!' }],
-};
-
-const onFinish = (fieldsValue) => {
-  const rangeValue = fieldsValue['range-picker'];
-  const rangeTimeValue = fieldsValue['range-time-picker'];
-  const values = {
-    ...fieldsValue,
-    'Viajar': fieldsValue['Viajar'].format('YYYY-MM-DD'),
-    'date-time-picker': fieldsValue['date-time-picker'].format('YYYY-MM-DD HH:mm:ss'),
-    'month-picker': fieldsValue['month-picker'].format('YYYY-MM'),
-    'range-picker': [rangeValue[0].format('YYYY-MM-DD'), rangeValue[1].format('YYYY-MM-DD')],
-    'range-time-picker': [
-      rangeTimeValue[0].format('YYYY-MM-DD HH:mm:ss'),
-      rangeTimeValue[1].format('YYYY-MM-DD HH:mm:ss'),
-    ],
-    'time-picker': fieldsValue['time-picker'].format('HH:mm:ss'),
+  const onFormVariantChange = ({ variant }) => {
+    setComponentVariant(variant);
   };
-  console.log('Received values of form: ', values);
-};
 
-const App = () => (
-  <Form
-    name="time_related_controls"
-    {...formItemLayout}
-    onFinish={onFinish}
-    style={{ maxWidth: 1000 }}
-  >
-    {/* Colocando os inputs lado a lado */}
-    <Row gutter={16}>
-      <Col span={12}>
-        <Form.Item name="Viajar" label="Viajar" {...config}>
-          <DatePicker />
-        </Form.Item>
-      </Col>
-      <Col span={12}>
-        <Form.Item name="date-time-picker" label="DatePicker[showTime]" {...config}>
-          <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
-        </Form.Item>
-      </Col>
-    </Row>
-    
-    <Row gutter={16}>
-      <Col span={12}>
-        <Form.Item name="month-picker" label="MonthPicker" {...config}>
-          <DatePicker picker="month" />
-        </Form.Item>
-      </Col>
-      <Col span={12}>
-        <Form.Item name="range-picker" label="RangePicker" {...rangeConfig}>
-          <RangePicker />
-        </Form.Item>
-      </Col>
-    </Row>
-    
-    <Row gutter={16}>
-      <Col span={12}>
-        <Form.Item name="range-time-picker" label="RangePicker[showTime]" {...rangeConfig}>
-          <RangePicker showTime format="YYYY-MM-DD HH:mm:ss" />
-        </Form.Item>
-      </Col>
-      <Col span={12}>
-        <Form.Item name="time-picker" label="TimePicker" {...config}>
-          <TimePicker />
-        </Form.Item>
-      </Col>
-    </Row>
+  // Lida com a mudança no Select
+  const handleSelectChange = (value) => {
+    setSelectedOption(value);  // Armazena o valor selecionado
+    console.log("Opção selecionada:", value);  // Para testes
+  };
 
-    <Form.Item
-      wrapperCol={{
-        xs: { span: 24, offset: 0 },
-        sm: { span: 16, offset: 8 },
+  return (
+    <Form
+      {...formItemLayout}
+      onValuesChange={onFormVariantChange}
+      variant={componentVariant}
+      style={{
+        maxWidth: '900px',
+        margin: '0 auto',
       }}
     >
-      <Button type="primary" htmlType="submit">
-        Submit
-      </Button>
-    </Form.Item>
-  </Form>
-);
+      <div style={{ width: '600px', display: 'grid', justifyItems: 'start', padding: '10px' }}>
+        <h3>Ida e volta</h3>
+        <Form.Item style={{ textAlign: 'start' }} name="variant">
+          <Segmented options={['outlined']} />
+        </Form.Item>
+      </div>
+
+      <div style={{ display: 'flex', gap: '30px', padding: '10px', height:'100px' }}>
+
+        <Form.Item
+              label="Origem"
+              name="origem"  // Nome único para este Select
+              style={{ flex: 7}}
+              rules={[{ required: true, message: 'Por favor, selecione a origem!' }]} // Mensagem customizada
+            >
+              <Select onChange={(value) => console.log('Origem selecionada:', value)}>
+                <Option value="araiose">Araioses</Option>
+                <Option value="parnaiba">Parnaíba</Option>
+                <Option value="barreirinhas">Barreirinhas</Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item
+              label="Destino"
+              name="destino"  // Nome único para este Select
+              style={{ flex: 7 }}
+              rules={[{ required: true, message: 'Por favor, selecione o destino!' }]} // Mensagem customizada
+            >
+              <Select onChange={(value) => console.log('Destino selecionado:', value)}>
+                <Option value="araiose">Araioses</Option>
+                <Option value="parnaiba">Parnaíba</Option>
+                <Option value="barreirinhas">Barreirinhas</Option>
+              </Select>
+            </Form.Item>
+
+        <Form.Item
+          label="Data Ida"
+          name="DatePicker"
+          style={{ width:'120px' }}
+          rules={[{ required: true, message: 'Preencha o campo' }]}
+        >
+          <DatePicker />
+        </Form.Item>
+
+        <Form.Item
+          label="Data Volta"
+          name="Data Ida"
+          style={{ width:'120px' , height:'50px'}}
+          rules={[{ required: true, message: 'Preencha o campo' }]}
+        >
+          <DatePicker />
+        </Form.Item>
+
+        <Form.Item
+          wrapperCol={{
+            offset: 1,
+            span: 19,
+          }}
+        >
+          <Button style={{ position: 'relative', bottom: '-30px', backgroundColor:'#C6223F' }} type="primary" htmlType="submit">
+            Enviar
+          </Button>
+        </Form.Item>
+      </div>
+    </Form>
+  );
+};
 
 export default App;

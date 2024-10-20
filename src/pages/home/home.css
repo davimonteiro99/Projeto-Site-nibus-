@@ -9,7 +9,9 @@
 }
 
 .forms-content{
-
-    width: 100%;
-    background-color: azure;
+    height: 250px;
+    width: 900px;
+    border-radius: 10px;
+    background-color: #F8FCF7;
+    border: 2px solid #187BD1;
 }
