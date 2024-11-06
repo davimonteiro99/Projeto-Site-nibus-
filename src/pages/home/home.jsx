@@ -14,6 +14,9 @@ function home(){
                     </div>
                 </div>
             </section>
+            <section className="ofertas-section">
+                <div className="ofertas-conatiner"></div>
+            </section>
 
          
         </div>

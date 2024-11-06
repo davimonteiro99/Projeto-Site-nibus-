@@ -1,120 +1,46 @@
-import React, { useState } from 'react';
-import {
-  Button,
-  Cascader,
-  DatePicker,
-  Form,
-  Input,
-  InputNumber,
-  Select,
-  TreeSelect,
-  Segmented,
-} from 'antd';
+import './forms.css';
 
-const { RangePicker } = DatePicker;
-const { Option } = Select;  // Pega o Option do Select
-
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 20 }, 
-  },
-  wrapperCol: {
-    xs: { span: 40 },
-    sm: { span: 50 },
-  },
-};
-
-const App = () => {
-  const [componentVariant, setComponentVariant] = useState('filled');
-  const [selectedOption, setSelectedOption] = useState(null); // Estado para controlar o Select
-
-  const onFormVariantChange = ({ variant }) => {
-    setComponentVariant(variant);
-  };
-
-  // Lida com a mudança no Select
-  const handleSelectChange = (value) => {
-    setSelectedOption(value);  // Armazena o valor selecionado
-    console.log("Opção selecionada:", value);  // Para testes
-  };
-
-  return (
-    <Form
-      {...formItemLayout}
-      onValuesChange={onFormVariantChange}
-      variant={componentVariant}
-      style={{
-        maxWidth: '900px',
-        margin: '0 auto',
-      }}
-    >
-      <div style={{ width: '600px', display: 'grid', justifyItems: 'start', padding: '10px' }}>
-        <h3>Ida e volta</h3>
-        <Form.Item style={{ textAlign: 'start' }} name="variant">
-          <Segmented options={['outlined']} />
-        </Form.Item>
+function Forms(){
+return(<div className="body">
+    <div className='titulo-form'><h1>Voos</h1></div>
+ <div class="container-form">
+  <form>
+    <div className='main-form'>
+    <div class="form-group">
+      <label for="origem">Origem:</label>
+      <input type="text" id="origem" name="origem" placeholder="Digite sua cidade de origem"></input>
+    </div>
+    <div class="form-group">
+      <label for="destino">Destino:</label>
+      <input type="text" id="destino" name="destino" placeholder="Digite sua cidade de destino"></input>
+    </div>
+    <div className='data-form'>
+      <div class="form-group">
+        <label for="ida">Data de ida:</label>
+        <input className='date1' type="date" id="ida" name="ida"></input>
       </div>
-
-      <div style={{ display: 'flex', gap: '30px', padding: '10px', height:'100px' }}>
-
-        <Form.Item
-              label="Origem"
-              name="origem"  // Nome único para este Select
-              style={{ flex: 7}}
-              rules={[{ required: true, message: 'Por favor, selecione a origem!' }]} // Mensagem customizada
-            >
-              <Select onChange={(value) => console.log('Origem selecionada:', value)}>
-                <Option value="araiose">Araioses</Option>
-                <Option value="parnaiba">Parnaíba</Option>
-                <Option value="barreirinhas">Barreirinhas</Option>
-              </Select>
-            </Form.Item>
-
-            <Form.Item
-              label="Destino"
-              name="destino"  // Nome único para este Select
-              style={{ flex: 7 }}
-              rules={[{ required: true, message: 'Por favor, selecione o destino!' }]} // Mensagem customizada
-            >
-              <Select onChange={(value) => console.log('Destino selecionado:', value)}>
-                <Option value="araiose">Araioses</Option>
-                <Option value="parnaiba">Parnaíba</Option>
-                <Option value="barreirinhas">Barreirinhas</Option>
-              </Select>
-            </Form.Item>
-
-        <Form.Item
-          label="Data Ida"
-          name="DatePicker"
-          style={{ width:'120px' }}
-          rules={[{ required: true, message: 'Preencha o campo' }]}
-        >
-          <DatePicker />
-        </Form.Item>
-
-        <Form.Item
-          label="Data Volta"
-          name="Data Ida"
-          style={{ width:'120px' , height:'50px'}}
-          rules={[{ required: true, message: 'Preencha o campo' }]}
-        >
-          <DatePicker />
-        </Form.Item>
-
-        <Form.Item
-          wrapperCol={{
-            offset: 1,
-            span: 19,
-          }}
-        >
-          <Button style={{ position: 'relative', bottom: '-30px', backgroundColor:'#C6223F' }} type="primary" htmlType="submit">
-            Enviar
-          </Button>
-        </Form.Item>
+      <div class="form-group">
+        <label for="volta">Data de volta:</label>
+        <input className='date2' type="date" id="volta" name="volta"></input>
       </div>
-    </Form>
-  );
-};
-
-export default App;
+    </div>
+   
+    <div class="form-group">
+      <label for="classe">Classe:</label>
+      <select id="classe" name="classe">
+        <option value="economica">Econômica</option>
+        <option value="executiva">Executiva</option>
+      </select>
+    </div>
+    <div className='botao-form'>
+        <button className='botao'  type="submit">Buscar Passagens</button>
+    </div>
+    </div>
+  </form>
+  <div className='information_extra'>
+    <p>Sua próxima aventura começa aqui</p>
+    <a href="./">Veja nossas viagens</a>
+    </div>
+</div>
+</div>)
+}export default Forms; 

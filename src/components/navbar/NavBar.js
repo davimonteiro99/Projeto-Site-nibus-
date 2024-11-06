@@ -6,13 +6,14 @@ import Button from "../button/button.jsx";
 const NavBar = () => {
     return(
         <div className="Header_div">
+            <div className="nav-container">
             <nav className="nav-land">
                 <div class="imagem-logo">
                     <img src={logos}/>
                 </div>
 
                 <ul class="menu-landing-page">
-                    <li><a href="landingPage.html">Home</a></li>
+                    <li><a href="#">Home</a></li>
                     <li><a href="#">Destinos</a></li>
                     <li><a href="#">Ofertas</a></li>
                     <li><a href="#">Contatos</a></li>
@@ -24,6 +25,8 @@ const NavBar = () => {
                     <Button/>
                 </div>
             </nav>
+            </div>
+        
         </div>
 );
 };
