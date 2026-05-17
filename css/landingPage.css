@@ -1,46 +1,127 @@
-body{
+/* --- CONFIGURAÇÕES GERAIS --- */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "DM Sans", sans-serif;
 }
 
-#cabecalho{
-    display: grid;
-    height: 100px;
-    width: 100%;
-    padding: 2px;
-    background-color: rgba(255, 29, 165, 0.4);
+body {
+    font-family: 'Poppins', sans-serif; /* Usando a fonte que você importou */
+    background-color: #f5f5f5;
+    overflow-x: hidden; /* Evita qualquer barra de rolagem horizontal indesejada */
 }
 
-nav{
-    display: grid;
-    grid-template-columns: 2fr 3fr 2fr;
-    padding: 4px;
-}
-
-.imagem-logo{
-    grid-column: 1;
-    align-self: center;
-    justify-self: center;
-}
-
-.menu-landing-page{
-    display: flex ;
+/* --- NAV / MENU SUPERIOR --- */
+.nav-landingpage {
+    display: flex;
     align-items: center;
-}
-.menu-landing-page li{
-    margin-left: 60px;
-    list-style: none;
-}
-.menu-landing-page li a{
-    text-decoration: none;
-    color: black;
-    font-size: 16px;
-    font-weight: 500;
+    justify-content: space-between;
+    padding: 0.75rem 2rem;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.conatiner-buttom-login{
-    align-self: center;
-    justify-self: center;
+.logo-landingpage img {
+    width: auto;
+    height: 56px;
+    display: block;
+}
+
+.menu-landingpage {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-landingpage a {
+    text-decoration: none;
+    color: #333;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.menu-landingpage a:hover {
+    color: #e87c2a;
+}
+
+
+.btn-landingpage {
+    background: #e87c2a;
+    color: #fff;
+    padding: 0.55rem 1.4rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn-landingpage:hover {
+    background: #d46b1f;
+}
+
+.hero-banner {
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 74px); 
+    background-image: linear-gradient(to right, rgba(255,255,255,0.4), transparent), url('../image/praia.png');
+    background-size: cover;
+    background-position: center bottom; /* Força a estrada e o ônibus a ficarem colados na base */
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center; 
+    padding: 0 10% 140px 10%; 
+    box-sizing: border-box;
+}
+
+
+.banner-content {
+    max-width: 550px; 
+    z-index: 2; 
+}
+
+.banner-content h1 {
+    font-size: 2.5rem;
+    color: #113243; 
+    line-height: 1.3;
+    margin-bottom: 30px;
+    font-weight: 700; 
+}
+
+
+.btn-adventure {
+    display: inline-block;
+    padding: 15px 40px;
+    background-color: #f3a66b; 
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.btn-adventure:hover {
+    background-color: #e29257; 
+}
+
+
+/* --- RESPONSIVIDADE (Telas menores/Celular) --- */
+@media (max-width: 768px) {
+    .hero-banner {
+        padding: 0 5% 100px 5%;
+        min-height: 70vh;
+        background-position: 65% bottom; /* Move a foto um pouco para o lado para o ônibus aparecer no celular */
+    }
+  
+    .banner-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .menu-landingpage {
+        display: none; /* Esconde o menu simples no celular (pode criar um menu hambúrguer depois) */
+    }
 }
